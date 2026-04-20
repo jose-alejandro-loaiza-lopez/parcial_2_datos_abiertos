@@ -46,7 +46,25 @@ lib/
 
 Dashboard:
 
+![Dashboard](capturas\Screenshot_2026_04_20_17_08_35_097_com_example_parcial_2_datos_abiertos.jpg)
 
+Listado:
+
+![Listado](capturas\Screenshot_2026_04_20_17_08_44_219_com_example_parcial_2_datos_abiertos.jpg)
+
+Detalle:
+
+![Detalle](capturas\Screenshot_2026_04_20_17_08_48_589_com_example_parcial_2_datos_abiertos.jpg)
+
+### Manejo de estados:
+
+Cargando:
+
+![Manejo de estados](capturas\Screenshot_2026_04_20_17_08_40_501_com_example_parcial_2_datos_abiertos.jpg)
+
+Error:
+
+![Manejo de estados](capturas\Screenshot_2026_04_20_17_09_03_683_com_example_parcial_2_datos_abiertos.jpg)
 
 ---
 
