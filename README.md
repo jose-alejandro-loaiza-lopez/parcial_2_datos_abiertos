@@ -161,7 +161,7 @@ flutter run
 ## 👤 Información del estudiante
 
 - **Nombre:** Jose Alejandro Loaiza López
-- **Materia:** Datos Abiertos
+- **Materia:** Desarrollo Movil
 - **Repositorio:** https://github.com/jose-alejandro-loaiza-lopez/parcial_2_datos_abiertos
 
 ---
