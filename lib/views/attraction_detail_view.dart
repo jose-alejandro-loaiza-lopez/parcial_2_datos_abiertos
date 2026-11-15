@@ -64,7 +64,7 @@ class _AttractionDetailViewState extends State<AttractionDetailView> {
                     child: Image.network(
                       a.primaryImage!,
                       fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => Container(
+                      errorBuilder: (_, _, _) => Container(
                         color: const Color(0xFFD97706).withValues(alpha: 0.15),
                         child: const Center(
                           child: Icon(Icons.image_not_supported,

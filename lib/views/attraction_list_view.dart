@@ -71,7 +71,7 @@ class _AttractionListViewState extends State<AttractionListView> {
                             ? Image.network(
                                 a.primaryImage!,
                                 fit: BoxFit.cover,
-                                errorBuilder: (_, __, ___) => Container(
+                                errorBuilder: (_, _, _) => Container(
                                   color: const Color(0xFFD97706)
                                       .withValues(alpha: 0.15),
                                   child: const Icon(Icons.image_not_supported,
