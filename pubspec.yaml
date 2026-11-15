@@ -26,4 +26,4 @@ flutter:
   uses-material-design: true
 
   assets:
-    - config.env
+    - api_config.txt

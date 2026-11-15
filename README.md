@@ -43,7 +43,7 @@ La aplicación se publica como build web de Flutter en GitHub Pages. En pantalla
 | `/TouristicAttraction` | Listado y detalle de atracciones turísticas |
 | `/Region` | Listado y detalle de regiones naturales |
 
-La URL base se configura en `config.env` (archivo opcional; si no está disponible, la aplicación usa la URL pública como respaldo):
+La URL base se configura en `api_config.txt` (archivo opcional; si no está disponible, la aplicación usa la URL pública como respaldo):
 
 ```env
 API_BASE_URL=https://api-colombia.com/api/v1
