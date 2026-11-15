@@ -8,9 +8,8 @@ Future<void> main() async {
 
   // La configuración es opcional: si el hosting no sirve el archivo,
   // AppConfig usa la URL pública de la API Colombia como respaldo.
-  // Se usa `config.env` (sin punto inicial) porque GitHub Pages no publica
-  // archivos ocultos como `.env`.
-  await dotenv.load(fileName: 'config.env', isOptional: true);
+  // Se usa `api_config.txt` porque GitHub Pages no publica archivos `.env`.
+  await dotenv.load(fileName: 'api_config.txt', isOptional: true);
 
   runApp(const MyApp());
 }
