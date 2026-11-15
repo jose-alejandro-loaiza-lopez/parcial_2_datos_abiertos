@@ -78,7 +78,8 @@ jobs:
           echo "Verificando $PAGE_URL"
 
           for attempt in $(seq 1 12); do
-            if curl -fsSL --compressed --max-time 30 "$PAGE_URL" | grep -q "Colombia Open Data"; then
+            if curl -fsSL --compressed --max-time 30 "$PAGE_URL" | grep -q "Colombia Open Data" \
+              && curl -fsSL --max-time 60 "$PAGE_URL/main.dart.js" -o /dev/null; then
               echo "✔ La aplicación está disponible y sirve el contenido esperado."
               exit 0
             fi
