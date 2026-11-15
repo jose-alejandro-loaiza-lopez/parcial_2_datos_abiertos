@@ -6,13 +6,11 @@ import 'themes/app_theme.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // El archivo .env es opcional en producción: si el hosting no lo sirve,
+  // La configuración es opcional: si el hosting no sirve el archivo,
   // AppConfig usa la URL pública de la API Colombia como respaldo.
-  try {
-    await dotenv.load(fileName: '.env');
-  } catch (_) {
-    // Se conserva la configuración por defecto de AppConfig.
-  }
+  // Se usa `config.env` (sin punto inicial) porque GitHub Pages no publica
+  // archivos ocultos como `.env`.
+  await dotenv.load(fileName: 'config.env', isOptional: true);
 
   runApp(const MyApp());
 }

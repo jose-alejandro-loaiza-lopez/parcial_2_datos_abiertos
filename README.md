@@ -3,7 +3,7 @@
 Aplicación **Flutter** que explora datos abiertos de Colombia consumiendo la [API Colombia](https://api-colombia.com/). Permite consultar **departamentos**, **presidentes**, **atracciones turísticas** y **regiones** desde una interfaz Material 3, con navegación declarativa y estados explícitos de carga y error.
 
 [![CI/CD](https://github.com/jose-alejandro-loaiza-lopez/parcial_2_datos_abiertos/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/jose-alejandro-loaiza-lopez/parcial_2_datos_abiertos/actions/workflows/deploy-pages.yml)
-[![Flutter](https://img.shields.io/badge/Flutter-3.50-02569B?logo=flutter&logoColor=white)](https://flutter.dev/)
+[![Flutter](https://img.shields.io/badge/Flutter-3.44-02569B?logo=flutter&logoColor=white)](https://flutter.dev/)
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-online-38bdf8?logo=github)](https://jose-alejandro-loaiza-lopez.github.io/parcial_2_datos_abiertos/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-34d399.svg)](./LICENSE)
 
@@ -11,13 +11,13 @@ Aplicación **Flutter** que explora datos abiertos de Colombia consumiendo la [A
 
 **https://jose-alejandro-loaiza-lopez.github.io/parcial_2_datos_abiertos/**
 
-La aplicación se publica como build web de Flutter en GitHub Pages. También puede ejecutarse en Android e iOS desde el mismo código.
+La aplicación se publica como build web de Flutter en GitHub Pages. En pantallas de escritorio la demo se presenta dentro de un marco vertical **9:18**, con el objetivo de que la experiencia móvil se vea como en un celular; en celulares ocupa toda la pantalla. También puede ejecutarse en Android e iOS desde el mismo código.
 
 ## Capturas
 
 | Dashboard | Departamentos | Detalle |
 |-----------|---------------|---------|
-| ![Dashboard](capturas/Screenshot_2026_04_20_17_08_35_097_com_example_parcial_2_datos_abiertos.jpg) | ![Departamentos](capturas/Screenshot_2026_04_20_17_08_40_501_com_example_parcial_2_datos_abiertos.jpg) | ![Detalle](capturas/Screenshot_2026_04_20_17_08_44_219_com_example_parcial_2_datos_abiertos.jpg) |
+| ![Dashboard](capturas/Screenshot_2026_04_20_17_08_35_097_com_example_parcial_2_datos_abiertos.jpg) | ![Departamentos](capturas/Screenshot_2026_04_20_17_08_44_219_com_example_parcial_2_datos_abiertos.jpg) | ![Detalle](capturas/Screenshot_2026_04_20_17_08_48_589_com_example_parcial_2_datos_abiertos.jpg) |
 
 ## Funcionalidades
 
@@ -43,7 +43,7 @@ La aplicación se publica como build web de Flutter en GitHub Pages. También pu
 | `/TouristicAttraction` | Listado y detalle de atracciones turísticas |
 | `/Region` | Listado y detalle de regiones naturales |
 
-La URL base se configura en `.env`:
+La URL base se configura en `config.env` (archivo opcional; si no está disponible, la aplicación usa la URL pública como respaldo):
 
 ```env
 API_BASE_URL=https://api-colombia.com/api/v1
@@ -111,7 +111,7 @@ flutter analyze
 flutter test
 ```
 
-Las pruebas cubren la conversión de los cuatro modelos, los widgets compartidos, el dashboard y la configuración de rutas.
+Las pruebas cubren la conversión de los cuatro modelos, los widgets compartidos, el dashboard, la configuración de rutas y la lectura tolerante de la configuración de la API.
 
 ## Build web
 
