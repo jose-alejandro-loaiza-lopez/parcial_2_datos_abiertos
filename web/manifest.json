@@ -1,11 +1,11 @@
 {
-    "name": "parcial_2_datos_abiertos",
-    "short_name": "parcial_2_datos_abiertos",
+    "name": "Colombia Open Data",
+    "short_name": "Colombia Data",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#F5F7FA",
+    "theme_color": "#1B3A5C",
+    "description": "Explora departamentos, presidentes, atracciones turísticas y regiones de Colombia con la API Colombia.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
