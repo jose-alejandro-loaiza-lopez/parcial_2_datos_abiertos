@@ -1,173 +1,145 @@
-# Colombia Open Data — Flutter
+# Colombia Open Data
 
-Aplicación Flutter que consume la [API Colombia](https://api-colombia.com/) para mostrar datos abiertos de Colombia, incluyendo **Departamentos**, **Presidentes**, **Atracciones Turísticas** y **Regiones**.
+Aplicación **Flutter** que explora datos abiertos de Colombia consumiendo la [API Colombia](https://api-colombia.com/). Permite consultar **departamentos**, **presidentes**, **atracciones turísticas** y **regiones** desde una interfaz Material 3, con navegación declarativa y estados explícitos de carga y error.
 
----
+[![CI/CD](https://github.com/jose-alejandro-loaiza-lopez/parcial_2_datos_abiertos/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/jose-alejandro-loaiza-lopez/parcial_2_datos_abiertos/actions/workflows/deploy-pages.yml)
+[![Flutter](https://img.shields.io/badge/Flutter-3.50-02569B?logo=flutter&logoColor=white)](https://flutter.dev/)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-online-38bdf8?logo=github)](https://jose-alejandro-loaiza-lopez.github.io/parcial_2_datos_abiertos/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-34d399.svg)](./LICENSE)
 
-## 📋 Descripción
+## Demo
 
-La aplicación se conecta a **4 endpoints** de la API Colombia:
+**https://jose-alejandro-loaiza-lopez.github.io/parcial_2_datos_abiertos/**
 
-| # | Endpoint | Descripción |
-|---|----------|-------------|
-| 1 | `/Department` | Los 32 departamentos con capital, población y superficie |
-| 2 | `/President` | Historia presidencial de Colombia con biografías |
-| 3 | `/TouristicAttraction` | Lugares turísticos con imágenes y coordenadas |
-| 4 | `/Region` | Las 6 regiones naturales del país |
+La aplicación se publica como build web de Flutter en GitHub Pages. También puede ejecutarse en Android e iOS desde el mismo código.
+
+## Capturas
+
+| Dashboard | Departamentos | Detalle |
+|-----------|---------------|---------|
+| ![Dashboard](capturas/Screenshot_2026_04_20_17_08_35_097_com_example_parcial_2_datos_abiertos.jpg) | ![Departamentos](capturas/Screenshot_2026_04_20_17_08_40_501_com_example_parcial_2_datos_abiertos.jpg) | ![Detalle](capturas/Screenshot_2026_04_20_17_08_44_219_com_example_parcial_2_datos_abiertos.jpg) |
+
+## Funcionalidades
+
+- **Dashboard** con cuatro categorías y acceso directo a cada sección.
+- **Departamentos**: listado alfabético con capital y detalle con población, superficie, municipios e indicativo.
+- **Presidentes**: historia presidencial con nombre completo, periodo, partido político e imagen.
+- **Atracciones turísticas**: listado con imagen principal, ciudad y coordenadas.
+- **Regiones**: las seis regiones naturales de Colombia con su descripción.
+- Manejo de **tres estados por vista**: cargando, error con reintento y datos.
+- Navegación declarativa con `go_router` y rutas anidadas de detalle.
+- Tema Material 3 con la paleta inspirada en la bandera de Colombia.
+- Pruebas unitarias y de widgets sobre modelos, widgets compartidos, dashboard y rutas.
+- Pipeline de GitHub Actions con análisis, pruebas, build web, despliegue y verificación.
+
+## API consumida
 
 **Base URL:** `https://api-colombia.com/api/v1`
 
----
+| Endpoint | Uso en la aplicación |
+|----------|----------------------|
+| `/Department` | Listado y detalle de los departamentos |
+| `/President` | Listado y detalle de presidentes |
+| `/TouristicAttraction` | Listado y detalle de atracciones turísticas |
+| `/Region` | Listado y detalle de regiones naturales |
 
-## 🏗️ Arquitectura del proyecto
+La URL base se configura en `.env`:
 
+```env
+API_BASE_URL=https://api-colombia.com/api/v1
 ```
+
+## Arquitectura
+
+```text
 lib/
-  config/          → Configuración general (lectura de .env)
-  models/          → Modelos con fromJson y toJson
-  routes/          → Configuración de go_router (rutas con nombre)
-  services/        → Llamadas HTTP (paquete http)
-  themes/          → Tema global de la aplicación
-  views/           → Pantallas: Dashboard, Listados, Detalles
-  widgets/         → Componentes reutilizables (loading, error, cards)
-  main.dart        → Punto de entrada
+├── config/app_config.dart            # Lectura de variables de entorno
+├── models/                           # Department, President, Region, TouristicAttraction
+├── routes/app_router.dart            # Rutas con go_router
+├── services/
+│   ├── api_service.dart              # Cliente HTTP genérico y manejo de status codes
+│   └── colombia_service.dart         # Servicios por dominio
+├── themes/app_theme.dart             # Tema Material 3
+├── views/                            # Dashboard, listados y detalles
+├── widgets/                          # DashboardCard, LoadingWidget, ErrorDisplay
+└── main.dart                         # Punto de entrada
 ```
 
 ### Capas
 
-- **models/** — Cada modelo tiene `fromJson()` y `toJson()`. Manejo de nulabilidad para campos opcionales.
-- **services/** — `ApiService` es un helper genérico que maneja status codes (`200` → éxito, cualquier otro → excepción). Los servicios específicos (`DepartmentService`, etc.) parsean a modelos tipados.
-- **views/** — Cada vista maneja 3 estados: *cargando* (`CircularProgressIndicator`), *error* (con botón de reintentar) y *éxito* (renderizado de datos).
-- **routes/** — `go_router` con rutas con nombre (`name`) y paso de parámetros por path (`/departments/:id`).
+- **models**: cada modelo expone `fromJson` y `toJson`, con manejo de campos opcionales.
+- **services**: `ApiService` centraliza las peticiones HTTP; los servicios por dominio transforman la respuesta en modelos tipados.
+- **views**: cada pantalla gestiona los estados de carga, error y éxito mediante `FutureBuilder`.
+- **widgets**: componentes reutilizables para tarjetas, carga y error.
+- **routes**: rutas nombradas con `go_router`, incluyendo el detalle de cada sección.
 
----
+## Stack
 
-## Capturas del Dashboard, Listado, Detalle y manejo de estados.
+| Capa | Tecnología |
+|------|------------|
+| Framework | Flutter 3.44 (Dart 3.12) |
+| Navegación | go_router |
+| HTTP | package:http |
+| Configuración | flutter_dotenv |
+| Pruebas | flutter_test |
+| CI/CD | GitHub Actions |
+| Publicación | GitHub Pages (Flutter web) |
 
-Dashboard:
+## Requisitos
 
-![Dashboard](capturas/Screenshot_2026_04_20_17_08_35_097_com_example_parcial_2_datos_abiertos.jpg)
+- Flutter 3.44 o superior (canal stable)
+- Dart 3.12 o superior incluido con Flutter
+- Chrome para ejecutar la versión web en desarrollo
 
-Listado:
-
-![Listado](capturas/Screenshot_2026_04_20_17_08_44_219_com_example_parcial_2_datos_abiertos.jpg)
-
-Detalle:
-
-![Detalle](capturas/Screenshot_2026_04_20_17_08_48_589_com_example_parcial_2_datos_abiertos.jpg)
-
-### Manejo de estados:
-
-Cargando:
-
-![Manejo de estados: Cargando](capturas/Screenshot_2026_04_20_17_08_40_501_com_example_parcial_2_datos_abiertos.jpg)
-
-Error:
-
-![Manejo de estados: Error](capturas/Screenshot_2026_04_20_17_09_03_683_com_example_parcial_2_datos_abiertos.jpg)
-
----
-
-## 🗺️ Rutas implementadas
-
-| Ruta | Nombre | Pantalla |
-|------|--------|----------|
-| `/` | `dashboard` | Dashboard con cards |
-| `/departments` | `departments` | Listado de departamentos |
-| `/departments/:id` | `department-detail` | Detalle del departamento |
-| `/presidents` | `presidents` | Listado de presidentes |
-| `/presidents/:id` | `president-detail` | Detalle del presidente |
-| `/attractions` | `attractions` | Listado de atracciones |
-| `/attractions/:id` | `attraction-detail` | Detalle de la atracción |
-| `/regions` | `regions` | Listado de regiones |
-| `/regions/:id` | `region-detail` | Detalle de la región |
-
----
-
-## 📦 Paquetes utilizados
-
-| Paquete | Uso |
-|---------|-----|
-| `http` | Consumo de la API REST |
-| `go_router` | Navegación entre pantallas con rutas con nombre |
-| `flutter_dotenv` | Variables de entorno (URL base de la API) |
-
----
-
-## 🚀 Instalación y ejecución
+## Desarrollo local
 
 ```bash
-# Clonar el repositorio
-git clone https://github.com/jose-alejandro-loaiza-lopez/parcial_2_datos_abiertos.git
-cd parcial_2_datos_abiertos
-
-# Instalar dependencias
 flutter pub get
+flutter run -d chrome
+```
 
-# Ejecutar
+Para ejecutar en un dispositivo o emulador Android:
+
+```bash
 flutter run
 ```
 
-> **Nota:** El archivo `.env` ya está incluido con la URL base de la API. Si necesitas cambiarla, edita el archivo `.env` en la raíz del proyecto.
+## Pruebas
 
----
-
-## 📄 Ejemplo de respuesta JSON
-
-### `GET /api/v1/Region`
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Caribe",
-    "description": "La región caribe es una de las regiones más importantes...",
-    "departments": null
-  },
-  {
-    "id": 5,
-    "name": "Andina",
-    "description": "La región Andina es la región con mayor desarrollo...",
-    "departments": null
-  }
-]
+```bash
+flutter analyze
+flutter test
 ```
 
-### `GET /api/v1/Department/5`
+Las pruebas cubren la conversión de los cuatro modelos, los widgets compartidos, el dashboard y la configuración de rutas.
 
-```json
-{
-  "id": 5,
-  "name": "Bogotá",
-  "description": "Bogotá, oficialmente Bogotá, Distrito Capital...",
-  "cityCapitalId": 167,
-  "municipalities": 1,
-  "surface": 1139,
-  "population": 8906342,
-  "phonePrefix": "1",
-  "cityCapital": {
-    "id": 167,
-    "name": "Bogotá D.C.",
-    "description": "...",
-    "surface": 1636,
-    "population": 7901653,
-    "postalCode": "110110"
-  }
-}
+## Build web
+
+```bash
+flutter build web --release --base-href "/parcial_2_datos_abiertos/"
 ```
 
----
+El resultado queda en `build/web`.
 
-## 👤 Información del estudiante
+## CI/CD
 
-- **Nombre:** Jose Alejandro Loaiza López
-- **Materia:** Desarrollo Movil
-- **Repositorio:** https://github.com/jose-alejandro-loaiza-lopez/parcial_2_datos_abiertos
+El workflow [`deploy-pages.yml`](./.github/workflows/deploy-pages.yml) se ejecuta en cada push a `main` y realiza:
 
----
+1. Instalación de Flutter con caché.
+2. `flutter pub get`.
+3. `flutter analyze`.
+4. `flutter test`.
+5. Build web de producción con el `base-href` del repositorio.
+6. Publicación del artefacto en GitHub Pages.
+7. Verificación de la URL publicada mediante `curl`, comprobando que el sitio responde con el contenido esperado.
 
-## 📌 Endpoint base
+## Autor
 
-🔗 [https://api-colombia.com/api/v1](https://api-colombia.com/api/v1)
+**José Alejandro Loaiza López**
+- GitHub: [@jose-alejandro-loaiza-lopez](https://github.com/jose-alejandro-loaiza-lopez)
+- Universidad: Unidad Central del Valle del Cauca (UCEVA)
+- Ubicación: Tuluá, Valle del Cauca, Colombia
 
-📖 [Documentación Swagger](https://api-colombia.com/swagger/index.html)
+## Licencia
+
+Este proyecto está bajo la licencia [MIT](./LICENSE).
