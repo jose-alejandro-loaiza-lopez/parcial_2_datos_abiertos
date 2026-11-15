@@ -5,7 +5,15 @@ import 'themes/app_theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: '.env');
+
+  // El archivo .env es opcional en producción: si el hosting no lo sirve,
+  // AppConfig usa la URL pública de la API Colombia como respaldo.
+  try {
+    await dotenv.load(fileName: '.env');
+  } catch (_) {
+    // Se conserva la configuración por defecto de AppConfig.
+  }
+
   runApp(const MyApp());
 }
 
